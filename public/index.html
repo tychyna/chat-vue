@@ -8,32 +8,26 @@
 
     <title>My chat</title>
 
-    <link rel="stylesheet" href="./public/css/style.css">
-    <link rel="icon" href="./public/images/favicon.ico">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="icon" href="./images/favicon.ico">
 
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 </head>
 
 <body>
     <div class='container' id="app">
-        <h1></h1>
+        <h1>{{ room == "" ? "Your chat :)" : room }}</h1>
         <div class='chatbox'>
             <div class='chatbox__user-list'>
                 <h1>Rooms</h1>
-                <div>
+                <div v-bind:class="room == 'General' ? 'chatbox__user--active' : 'chatbox__user--busy'"  @click="joinRoom('General')">
                     <p>General</p>
                 </div>
-                <div>
-                    <p>Mens</p>
+                <div v-bind:class="room == 'JavaScript' ? 'chatbox__user--active' : 'chatbox__user--busy'" @click="joinRoom('JavaScript')">
+                    <p>JavaScript</p>
                 </div>
-                <div>
-                    <p>Cars</p>
-                </div>
-                <div>
-                    <p>Bikes</p>
-                </div>
-                <div>
-                    <p>Cook</p>
+                <div v-bind:class="room == 'Vue.js' ? 'chatbox__user--active' : 'chatbox__user--busy'" @click="joinRoom('Vue.js')">
+                    <p>Vue.js</p>
                 </div>
             </div>
             <div class="chatbox__messages">
@@ -51,9 +45,9 @@
         </div>
     </div>
 
-    <script src="./public/js/vue.min.js"></script>
-    <script src="./public/js/socket.io.js"></script>
-    <script src="./public/js/common.js"></script>
+    <script src="./js/vue.min.js"></script>
+    <script src="./js/socket.io.js"></script>
+    <script src="./js/common.js"></script>
 </body>
 
 </html>
