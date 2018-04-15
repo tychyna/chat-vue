@@ -5,11 +5,11 @@ new Vue({
     data: {
         messageText: "",
         messages: [],
-        room: ""
+        room: "",
+        showChat: false,
+        userName: ""
     },
-    mounted: function () {
-        this.joinRoom("General");
-
+    mounted: function () {        
         socket.on("clientMessage", function (data) {
             var data = data.trim();
 
@@ -30,12 +30,22 @@ new Vue({
         joinRoom: function (roomName) {
             this.messages = [];
 
-            if(this.room != ""){
+            if (this.room != "") {
                 socket.emit("leaveRoom", this.room);
             }
 
             socket.emit("joinRoom", roomName);
             this.room = roomName;
+        },
+
+        userLogin: function () {
+            this.userName = this.userName.trim();
+
+            if (this.userName == "") {
+                alert("Please enter your name.");
+            } else {
+                this.joinRoom("General");
+            }
         }
     }
 });

@@ -17,7 +17,13 @@
 <body>
     <div class='container' id="app">
         <h1>{{ room == "" ? "Your chat :)" : room }}</h1>
-        <div class='chatbox'>
+
+        <form v-if="!showChat" @submit.prevent="userLogin">
+            <input type="text" v-model="userName" placeholder="Enter your name...">
+            <button type="submit">Login</button>
+        </form>
+
+        <div class='chatbox' v-if="showChat">
             <div class='chatbox__user-list'>
                 <h1>Rooms</h1>
                 <div v-bind:class="room == 'General' ? 'chatbox__user--active' : 'chatbox__user--busy'"  @click="joinRoom('General')">

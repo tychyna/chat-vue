@@ -7,8 +7,8 @@
 
 html,
 body {
-    background: -webkit-linear-gradient(330deg, #000, #26289c);
-    background: linear-gradient(120deg, #000, #26289c);
+    background: url("../images/bg.jpg") no-repeat;
+    background-size: cover;
     overflow: hidden;
 }
 
