@@ -15,10 +15,10 @@ app.get("/", function (req, res) {
 
 io.on("connection", function (socket) {
     console.log("New User has connected");
-    
-    socket.on("newMessage", function (data, room) {
-        console.log("There are new message: " + data);
-        socket.to(room).emit("clientMessage", data);
+
+    socket.on("newMessage", function (userName, messageText, room) {
+        console.log("There are new message: " + messageText);
+        socket.to(room).emit("clientMessage", [userName, messageText]);
     });
 
     socket.on("joinRoom", function (roomName) {

@@ -39,9 +39,9 @@
             <div class="chatbox__messages">
                 <div class="chatbox__messages__user-message" v-for="message in messages">
                     <div class="chatbox__messages__user-message--ind-message">
-                        <p class="name">Abdel Aziz</p>
+                        <p class="name">{{ message.user }}</p>
                         <br/>
-                        <p class="message">{{ message }}</p>
+                        <p class="message">{{ message.message }}</p>
                     </div>
                 </div>
             </div>

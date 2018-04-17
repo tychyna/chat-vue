@@ -9,21 +9,27 @@ new Vue({
         showChat: false,
         userName: ""
     },
-    mounted: function () {        
+    mounted: function () {
         socket.on("clientMessage", function (data) {
-            var data = data.trim();
 
             if (data) {
-                this.messages.push(data);
+                this.messages.push({
+                    user: data[0],
+                    message: data[1]
+                });
             }
-            return;
-
+            
         }.bind(this));
     },
     methods: {
         sendMessage: function () {
-            socket.emit("newMessage", this.messageText, this.room);
-            this.messages.push(this.messageText);
+            socket.emit("newMessage", this.userName, this.messageText, this.room);
+
+            this.messages.push({
+                user: this.userName,
+                message: this.messageText
+            });
+
             this.messageText = "";
         },
 
@@ -45,6 +51,7 @@ new Vue({
                 alert("Please enter your name.");
             } else {
                 this.joinRoom("General");
+                this.showChat = true;
             }
         }
     }
