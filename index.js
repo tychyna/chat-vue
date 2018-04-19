@@ -18,16 +18,42 @@ io.on("connection", function (socket) {
 
     socket.on("newMessage", function (userName, messageText, room) {
         console.log("There are new message: " + messageText);
-        socket.to(room).emit("clientMessage", [userName, messageText]);
+        socket.to(room).emit("clientMessage", {
+            "user": userName,
+            "message": messageText,
+            "type": "message"
+        });
     });
 
-    socket.on("joinRoom", function (roomName) {
-        console.log("User join to room: " + roomName);
+    socket.on("joinRoom", function (roomName, userName) {
+
         socket.join(roomName);
+
+        io.sockets.emit("clientMessage", {
+            "clientsCount": socket.conn.server.clientsCount,
+            "type": "online"
+        });
+
+        socket.to(roomName).emit("clientMessage", {
+            "user": "Info",
+            "message": userName + " join to room.",
+            "type": "message"
+        });
     });
 
-    socket.on("leaveRoom", function (roomName) {
-        console.log("User leave room: " + roomName);
-        socket.leave(roomName);
+    socket.on("leaveRoom", function (room, userName, roomName) {
+        socket.to(room).emit("clientMessage", {
+            "user": "Info",
+            "message": userName + " leave to room: " + roomName,
+            "type": "message"
+        });
+        socket.leave(room);
+    });
+
+    socket.on("disconnect", function () {
+        io.sockets.emit("clientMessage", {
+            "clientsCount": socket.conn.server.clientsCount,
+            "type": "online"
+        });
     });
 })

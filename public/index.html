@@ -26,15 +26,10 @@
         <div class='chatbox' v-if="showChat">
             <div class='chatbox__user-list'>
                 <h1>Rooms</h1>
-                <div v-bind:class="room == 'General' ? 'chatbox__user--active' : 'chatbox__user--busy'"  @click="joinRoom('General')">
-                    <p>General</p>
-                </div>
-                <div v-bind:class="room == 'JavaScript' ? 'chatbox__user--active' : 'chatbox__user--busy'" @click="joinRoom('JavaScript')">
-                    <p>JavaScript</p>
-                </div>
-                <div v-bind:class="room == 'Vue.js' ? 'chatbox__user--active' : 'chatbox__user--busy'" @click="joinRoom('Vue.js')">
-                    <p>Vue.js</p>
-                </div>
+                <p>Online now: ({{ online }})</p>
+                <div v-for="roomName in rooms" v-bind:class="roomName == room ? 'chatbox__user--active' : 'chatbox__user--busy'"  @click="joinRoom(roomName)">
+                    <p>{{ roomName }}</p>
+                </div>               
             </div>
             <div class="chatbox__messages">
                 <div class="chatbox__messages__user-message" v-for="message in messages">

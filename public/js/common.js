@@ -5,20 +5,26 @@ new Vue({
     data: {
         messageText: "",
         messages: [],
+        rooms: [
+            "General",
+            "JavaScript",
+            "Vue.js"
+        ],
         room: "",
         showChat: false,
-        userName: ""
+        userName: "",
+        online: 0
     },
     mounted: function () {
+
         socket.on("clientMessage", function (data) {
 
-            if (data) {
-                this.messages.push({
-                    user: data[0],
-                    message: data[1]
-                });
+            if (data.type == "message") {
+                this.messages.push(data);
+            } else if (data.type == "online") {
+                this.online = data.clientsCount;
             }
-            
+
         }.bind(this));
     },
     methods: {
@@ -37,10 +43,10 @@ new Vue({
             this.messages = [];
 
             if (this.room != "") {
-                socket.emit("leaveRoom", this.room);
+                socket.emit("leaveRoom", this.room, this.userName, roomName);
             }
 
-            socket.emit("joinRoom", roomName);
+            socket.emit("joinRoom", roomName, this.userName);
             this.room = roomName;
         },
 
