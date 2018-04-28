@@ -6,9 +6,10 @@ new Vue({
         messageText: "",
         messages: [],
         rooms: [
-            "General",
             "JavaScript",
-            "Vue.js"
+            "Vue.js",
+            "React.js",
+            "Angular.js"
         ],
         room: "",
         showChat: false,
@@ -61,7 +62,7 @@ new Vue({
             if (this.userName == "") {
                 alert("Please enter your name.");
             } else {
-                this.joinRoom("General");
+                this.joinRoom("JavaScript");
                 this.showChat = true;
             }
         }

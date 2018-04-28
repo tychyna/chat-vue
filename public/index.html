@@ -9,39 +9,69 @@
     <title>My chat</title>
 
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/bootstrap.css">
     <link rel="icon" href="./images/favicon.ico">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg"
+        crossorigin="anonymous">
 
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 </head>
 
 <body>
-    <div class='container' id="app">
-        <h1>{{ room == "" ? "Your chat :)" : room }}</h1>
+    <div class="container" id="app">
+        <div class="caption col-md-12">
+            <h1>{{room}}</h1>
+        </div>
 
-        <form v-if="!showChat" @submit.prevent="userLogin">
-            <input type="text" v-model="userName" placeholder="Enter your name...">
-            <button type="submit">Login</button>
-        </form>
+        <div class="chatbox col-md-8 offset-md-2" v-if="showChat">
+            <div class="row row-height">
+                <div class="user-chat col-md-9">
 
-        <div class='chatbox' v-if="showChat">
-            <div class='chatbox__user-list'>
-                <h1>Rooms</h1>
-                <p>Online now: ({{ online }})</p>
-                <div v-for="roomName in rooms" v-bind:class="roomName == room ? 'chatbox__user--active' : 'chatbox__user--busy'"  @click="joinRoom(roomName)">
-                    <p>{{ roomName }}</p>
-                </div>               
-            </div>
-            <div class="chatbox__messages">
-                <div class="chatbox__messages__user-message" v-for="message in messages">
-                    <div class="chatbox__messages__user-message--ind-message" v-bind:class="{ client : message.clientMessage, info: message.infoMessage, me: message.myMessage }">
+                    <div class="user-message" v-for="message in messages" :class="{ client : message.clientMessage, info: message.infoMessage, me: message.myMessage }">
                         <p class="name">{{ message.user }}</p>
-                        <br/>
                         <p class="message">{{ message.message }}</p>
+                    </div>
+
+                    <form class="send-message" @submit.prevent="sendMessage()">
+                        <input type="text" v-model="messageText" placeholder="Type Message...">
+                        <button type="submit">
+                            <i class="fas fa-comment-dots"></i>
+                        </button>
+                    </form>
+                </div>
+
+                <div class="user-pannel col-md-3">
+                    <div class="row">
+                        <div class="user-info col-md-12">
+                            <i class="fas fa-user"></i>
+                            <p>{{ userName }}</p>
+                        </div>
+                        <div class="room-list">
+                            <h2>
+                                <i class="fab fa-buromobelexperte"></i>
+                                Rooms
+                            </h2>
+                            <div v-for="roomName in rooms" :class="roomName == room ? 'active-room' : 'inactive-room'" @click="joinRoom(roomName)">
+                                <i class="fas fa-circle"></i>
+                                <p>{{ roomName }}</p>
+                            </div>
+                        </div>
+                        <div class="users-online">
+                            <i class="fas fa-globe"></i>
+                            <p>Online ({{ online }})</p>
+                        </div>
                     </div>
                 </div>
             </div>
-            <form @submit.prevent="sendMessage()">
-                <input type="text" v-model="messageText" placeholder="Type Message">
+        </div>
+
+        <div v-if="!showChat">
+            <h1>Your chat :)</h1>
+
+            <form @submit.prevent="userLogin">
+                <input type="text" v-model="userName" placeholder="Enter your name...">
+                <button type="submit">Login</button>
             </form>
         </div>
     </div>
