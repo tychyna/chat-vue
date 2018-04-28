@@ -14,14 +14,14 @@ app.get("/", function (req, res) {
 });
 
 io.on("connection", function (socket) {
-    console.log("New User has connected");
 
     socket.on("newMessage", function (userName, messageText, room) {
-        console.log("There are new message: " + messageText);
+
         socket.to(room).emit("clientMessage", {
             "user": userName,
             "message": messageText,
-            "type": "message"
+            "type": "message",
+            "clientMessage": true
         });
     });
 
@@ -37,7 +37,8 @@ io.on("connection", function (socket) {
         socket.to(roomName).emit("clientMessage", {
             "user": "Info",
             "message": userName + " join to room.",
-            "type": "message"
+            "type": "message",
+            "infoMessage": true
         });
     });
 

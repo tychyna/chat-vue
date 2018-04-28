@@ -33,7 +33,7 @@
             </div>
             <div class="chatbox__messages">
                 <div class="chatbox__messages__user-message" v-for="message in messages">
-                    <div class="chatbox__messages__user-message--ind-message">
+                    <div class="chatbox__messages__user-message--ind-message" v-bind:class="{ client : message.clientMessage, info: message.infoMessage, me: message.myMessage }">
                         <p class="name">{{ message.user }}</p>
                         <br/>
                         <p class="message">{{ message.message }}</p>

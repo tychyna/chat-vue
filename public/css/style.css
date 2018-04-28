@@ -89,6 +89,15 @@ body {
     overflow: auto;
 }
 
+.chatbox__messages__user-message--ind-message.client {
+    background: rgba(238, 130, 238, 0.466);
+}
+
+.chatbox__messages__user-message--ind-message.info {
+    background: rgba(10, 4, 10, 0.932);
+    color: #fff;
+}
+
 .chatbox__messages__user-message--ind-message>p.name {
     color: #FFF;
     font-size: 1em;

@@ -25,7 +25,11 @@ new Vue({
                 this.online = data.clientsCount;
             }
 
+            
+        console.log(data);
+
         }.bind(this));
+
     },
     methods: {
         sendMessage: function () {
@@ -33,7 +37,8 @@ new Vue({
 
             this.messages.push({
                 user: this.userName,
-                message: this.messageText
+                message: this.messageText,
+                myMessage: true
             });
 
             this.messageText = "";
