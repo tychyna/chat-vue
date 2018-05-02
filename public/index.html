@@ -21,24 +21,26 @@
 <body>
     <div class="container" id="app">
         <div class="caption col-md-12">
-            <h1>{{room}}</h1>
+            <h1>{{ room == "" ? "Awesome chat :)" : room }}</h1>
         </div>
 
         <div class="chatbox col-md-8 offset-md-2" v-if="showChat">
             <div class="row row-height">
                 <div class="user-chat col-md-9">
 
-                    <div class="user-message" v-for="message in messages" :class="{ client : message.clientMessage, info: message.infoMessage, me: message.myMessage }">
-                        <p class="name">{{ message.user }}</p>
-                        <p class="message">{{ message.message }}</p>
+                    <div class="messages-wrapper">
+                        <div class="user-message" v-for="message in messages" :class="{ client : message.clientMessage, info: message.infoMessage, me: message.myMessage }">
+                            <p class="name">{{ message.user }}</p>
+                            <p class="message">{{ message.message }}</p>
+                        </div>
                     </div>
-
                     <form class="send-message" @submit.prevent="sendMessage()">
                         <input type="text" v-model="messageText" placeholder="Type Message...">
                         <button type="submit">
                             <i class="fas fa-comment-dots"></i>
                         </button>
                     </form>
+                    
                 </div>
 
                 <div class="user-pannel col-md-3">
@@ -66,9 +68,7 @@
             </div>
         </div>
 
-        <div v-if="!showChat">
-            <h1>Your chat :)</h1>
-
+        <div id="login" class="col-md-6 offset-md-3" v-if="!showChat">
             <form @submit.prevent="userLogin">
                 <input type="text" v-model="userName" placeholder="Enter your name...">
                 <button type="submit">Login</button>

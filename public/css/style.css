@@ -44,9 +44,23 @@ body {
 }
 
 .user-chat {
-    height: 100%;
+    padding: 0 0 44px 0 !important;
+}
+
+.messages-wrapper {
+    height: -webkit-fill-available;
+    overflow-y: scroll;
     display: flex;
     flex-direction: column;
+}
+
+.send-message {
+    left: 0;
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+    height: 44px;
+    display: flex;
 }
 
 .user-info {
@@ -128,15 +142,6 @@ body {
 
 /* -------------- FORM SEND MESSAGE --------------- */
 
-.send-message {
-    left: 0;
-    bottom: 0;
-    position: absolute;
-    width: 100%;
-    height: 44px;
-    display: flex;
-}
-
 .send-message input {
     width: inherit;
     background: rgba(255, 255, 255, 0.05);
@@ -167,10 +172,12 @@ body {
 .user-message.me {
     align-self: flex-end;
     background: rgba(255, 255, 255, 0.1);
+    margin-right: 15px;
 }
 
 .user-message.client {
     background: rgba(255, 255, 255, 0.3);
+    margin-left: 15px;
 }
 
 .user-message.info {
@@ -198,4 +205,50 @@ body {
 
 .user-message.info p:first-of-type {
     display: none;
+}
+
+/* -------------- LOGIN FORM --------------- */
+
+#login {
+    margin-top: 25%;
+}
+
+#login input {
+    width: 100%;
+    height: 70px;
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.7);
+    padding: 0 30px;
+    outline: none;
+    border: none;
+    text-align: center;
+    font-size: 23px;
+}
+
+#login button {
+    width: 100%;
+    height: 70px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 18px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    font-size: 23px;
+}
+
+#login ::-webkit-input-placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+#login :-moz-placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+#login ::-moz-placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+#login :-ms-input-placeholder {
+    color: rgba(255, 255, 255, 0.7);
 }

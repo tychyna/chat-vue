@@ -26,9 +26,6 @@ new Vue({
                 this.online = data.clientsCount;
             }
 
-            
-        console.log(data);
-
         }.bind(this));
 
     },
